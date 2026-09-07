@@ -20,27 +20,17 @@ Each per-question record carries, for both systems, the answer as returned, the
 citations, the judge's score and the judge's written rationale, plus the
 question's authoring block and, where it has one, its advantage category.
 
-## How this question set came to be
+## What the 460 questions are
 
-Read this before using the figures.
+The 73k run scored 560 questions; the 460 released here are a subset selected
+from it after scoring. The 100 not carried forward are in `excluded_100.json`,
+with their scores and judge rationales; no reason for the selection was recorded,
+and DeepKnown's answer text was not retained for them. `results_73k_full560.json`
+holds the whole scored run, so any figure can be recomputed either way.
 
-The 73k run scored **560** questions. A **460**-question subset of that run was
-selected afterwards and released earlier; the 100 dropped questions are in
-`excluded_100.json`. No reason for the selection was recorded. The selection is
-not neutral with respect to the results: all 14 answerable questions on which
-DeepKnown scored zero fall among the dropped 100, so the 460-question subset
-contains no DeepKnown zero. Report the 560-question figures, or report both.
-
-An earlier step reduced a 600-question pool to 560 before scoring, on a
-retrieval-status field (29 FAIL, 9 not-recalled, 1 PASS, 1 recalled).
-
-The set has two authoring blocks. The **general** block supplies 349 of the 460.
-The **advantage** block supplies 111, each carrying one of six vendor-defined
-capability categories (deep semantics, attachment parsing, table-header
-continuation, tax-annotation governance, historical versions, cross-region).
-The between-system gap is larger on the advantage block than on the general one;
-on two of its six categories the hosted service scores higher. `block` and
-`advantage_type` ship with every record so any figure can be recomputed either way.
+The set has two authoring blocks, labelled on every record. The general block
+supplies 349 of the 460. The advantage block supplies 111, each carrying one of
+six capability categories defined by the developer of one of the systems.
 
 ## Question types
 
