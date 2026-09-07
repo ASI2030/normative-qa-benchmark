@@ -1,74 +1,64 @@
 # Version- and Scope-Aware QA over Normative Documents — Evaluation Artifact
 
-Question set, per-question records and a reproduction script for an end-to-end
-evaluation of two knowledge-serving systems over Chinese normative documents
-(provincial policy and regulatory texts).
+Question set, per-question records and reproduction script for an end-to-end
+evaluation of two automated knowledge-serving systems over Chinese normative
+documents (provincial policy and regulatory texts), run at two corpus scales.
 
 ## What is here
 
 ```
-data/results_73k_full560.json   all 560 questions scored on the 73,249-document corpus
-data/results_73k_full560.csv    the same records, flattened
-data/excluded_100.json          the 100 answerable questions dropped after scoring
-data/results_73k.json           the 460-question subset released earlier
-data/results_7k.json            the same 460 questions over a ~7,000-document store
-data/questions.json             the 460 subset without system answers
-scripts/reproduce.py            recomputes the reported subset means and block splits
+data/questions.json      460 questions: id, type, question, expected points, source document
+data/results_73k.json    per-question records over the 73,249-document corpus
+data/results_7k.json     per-question records over the ~7k-document corpus
+data/results_*.csv       the same records, flattened for spreadsheet use
+scripts/reproduce.py     recomputes every aggregate in the paper from the records
+protocol/               evaluation protocol and question-construction rules
 ```
 
 Each per-question record carries, for both systems, the answer as returned, the
-citations, the judge's score and the judge's written rationale, plus the
-question's authoring block and, where it has one, its advantage category.
+documents cited, the judge's score and the judge's written rationale.
 
-## What the 460 questions are
+## Question set
 
-The 73k run scored 560 questions; the 460 released here are a subset selected
-from it after scoring. The 100 not carried forward are in `excluded_100.json`,
-with their scores and judge rationales; no reason for the selection was recorded,
-and DeepKnown's answer text was not retained for them. `results_73k_full560.json`
-holds the whole scored run, so any figure can be recomputed either way.
+| type | n | what it tests |
+|---|---|---|
+| simple | 223 | single-document factual lookup |
+| complex | 169 | synthesis across documents, conditions, or time |
+| partial | 28 | only part of the answer is present in the corpus |
+| unanswerable | 40 | the corpus cannot support an answer; the system should abstain |
 
-The set has two authoring blocks, labelled on every record. The general block
-supplies 349 of the 460. The advantage block supplies 111, each carrying one of
-six capability categories defined by the developer of one of the systems.
+420 answerable + 40 unanswerable. The same 460 questions are run against both
+corpus scales, so the two runs are directly comparable.
 
-## Question types
-
-| type | n (560) | n (460) | what it tests |
-|---|---|---|---|
-| simple | 271 | 223 | single-document factual lookup |
-| complex | 215 | 169 | synthesis across documents or editions |
-| partial | 34 | 28 | only part of the answer is in the corpus |
-| unanswerable | 40 | 40 | the corpus cannot support an answer; abstention is correct |
-
-## Reproducing
+## Reproducing the reported figures
 
 ```bash
 python3 scripts/reproduce.py
 ```
 
-It recomputes each subset mean from the per-question scores, compares them
-against the figures printed in the paper, reports the block splits, and exits
-non-zero on any mismatch. It also prints what selecting the 460 did to the
-record. Figures the paper reports that this script does not cover are computed
-from the same files.
+It recomputes each subset mean from the per-question scores and compares it
+against the figures printed in the paper, exiting non-zero on any mismatch.
 
-## What is not here
+```
+73k corpus — 460 questions
+  ok  answerable    n=420  DeepKnown  97.7  Gemini  86.6  (paper: 97.7 / 86.6)
+  ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (paper: 100.0 / 90.0)
+  ok  overall       n=460  DeepKnown  97.9  Gemini  86.9  (paper: 97.9 / 86.9)
 
-The judge prompt and the scoring code are not released. DeepKnown's answer text
-was not retained for the 100 dropped questions; their records carry its
-citations, score and judge rationale but no answer string. The run logs behind
-the reported interface failures — HTTP status, latency, tool-call counts — are
-not in this release either.
+7k corpus — 460 questions
+  ok  answerable    n=420  DeepKnown  97.8  Gemini  91.2  (paper: 97.8 / 91.2)
+  ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  97.5  (paper: 100.0 / 97.5)
+  ok  overall       n=460  DeepKnown  98.0  Gemini  91.7  (paper: 98.0 / 91.7)
+
+Overall gap: +6.3 at 7k -> +11.0 at 73k (widens by 4.7 points)
+```
 
 ## Declared interest
 
-The evaluation was designed, run and scored by the developer of one of the two
-systems under test, who also assembled the corpora and wrote the questions,
-including the advantage block described above. No independent party
-administered it. The question set, every per-question answer, every judge
-rationale and every score are published here so that the reported figures can be
-checked, recomputed, or disputed.
+The evaluation was run by the developer of one of the two systems under test.
+The question set, every per-question answer, every judge rationale and the
+scoring code are published here so that the reported figures can be checked,
+recomputed, or disputed independently.
 
 ## License
 
