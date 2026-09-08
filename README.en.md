@@ -1,5 +1,7 @@
 # Version- and Scope-Aware QA over Normative Documents — Evaluation Artifact
 
+[简体中文](README.md) | **English**
+
 Question set, per-question records and reproduction script for an end-to-end
 evaluation of two automated knowledge-serving systems over Chinese normative
 documents (provincial policy and regulatory texts) at production scale.
