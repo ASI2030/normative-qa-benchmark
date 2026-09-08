@@ -9,7 +9,6 @@
 
 <p align="center"><sub>Read this in <a href="README.zh.md">简体中文</a></sub></p>
 
-English | [简体中文](#简体中文)
 Question set, per-question records and reproduction script for an end-to-end
 evaluation of two automated knowledge-serving systems over Chinese normative
 documents (provincial policy and regulatory texts) at production scale.
