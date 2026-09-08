@@ -1,5 +1,6 @@
 # Version- and Scope-Aware QA over Normative Documents — Evaluation Artifact
 
+English | [简体中文](#简体中文)
 Question set, per-question records and reproduction script for an end-to-end
 evaluation of two automated knowledge-serving systems over Chinese normative
 documents (provincial policy and regulatory texts) at production scale.
@@ -90,20 +91,21 @@ Question set and per-question records: CC BY 4.0. Scripts: MIT.
 
 ---
 
-<details>
-<summary><b>简体中文说明</b>（点击展开）</summary>
+# 简体中文
+
+[English](#version--and-scope-aware-qa-over-normative-documents--evaluation-artifact) | 简体中文
 
 这里是一次端到端评测的全部材料：题集、逐题记录与复现脚本。评测对象是两套自动化知识服务系统，
 语料为中文规范性文档（省级政策与规范性文件），在生产规模下运行。
 
-### 重要：两次运行不可互相比较
+## 重要：两次运行不可互相比较
 
 本产物包含两个语料规模的逐题记录，但**两次运行使用的裁判标准并不相同**——较小语料那次为节省评测
 成本，采用的是更早的一版标准。因此，任何通过比较两次运行得出的数字，都同时混入了语料规模的影响与
 评分工具本身的变化，而这两者无法从这些记录中分离。配套论文只报告全量语料（73,249 份文档）那一次，
 不做任何跨运行的论断。较小语料的记录出于完整性一并发布；**请勿把两者之间的差异读作规模效应**。
 
-### 目录内容
+## 目录内容
 
 ```
 data/questions.json      460 道题：编号、类型、题面、期望要点、来源文档
@@ -116,7 +118,7 @@ protocol/                评测协议与题集构建说明
 
 每条逐题记录都包含两套系统各自的：原样返回的答案、引用到的文档、裁判给出的分数，以及裁判的书面理由。
 
-### 题集构成
+## 题集构成
 
 | 类型 | 数量 | 考察什么 |
 |---|---|---|
@@ -127,7 +129,7 @@ protocol/                评测协议与题集构建说明
 
 可答 420 题 + 不可答 40 题。
 
-### 复现论文中的数字
+## 复现论文中的数字
 
 ```bash
 python3 scripts/reproduce.py
@@ -154,20 +156,18 @@ Scoring layer, full corpus (920 records)
   zero-citation rule fired on 23 answerable items; 5 carry an answer that was never read, 18 are empty
 ```
 
-### 已知的评分缺陷
+## 已知的评分缺陷
 
 评分包含一个规则层：可答题若记录到零条引用，会被直接判 0 分而不送裁判评阅。该规则在 73k 语料上对
 被测的托管服务触发了 23 次，其中 5 次的答案其实有实质内容却从未被评阅；而它对另一套系统一次也没有
 触发过——因为后者的记录存的是被引文档标题而非引用条数。剔除这 23 题后，托管服务的可答均分由 86.6
 变为 91.7。论文因此对每个主要数字都同时报告原始分与剔除后的修正分。
 
-### 利益声明
+## 利益声明
 
 本次评测由参与比较的两套系统之一的开发方执行。我们把题集、每一条逐题答案、每一条裁判理由和评分
 代码全部公开，正是为了让所报数字可以被独立核对、重算或质疑。
 
-### 许可
+## 许可
 
 题集与逐题记录：CC BY 4.0。脚本：MIT。
-
-</details>
