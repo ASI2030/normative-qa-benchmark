@@ -7,6 +7,8 @@
   <a href="README.md"><img alt="English" src="https://img.shields.io/badge/LANG-English-blue?style=for-the-badge&labelColor=555"></a>
 </p>
 
+<p align="center"><sub>Read this in <a href="README.md">English</a></sub></p>
+
 这里是一次端到端评测的全部材料：题集、逐题记录与复现脚本。评测对象是两套自动化知识服务系统，
 语料为中文规范性文档（省级政策与规范性文件），在生产规模下运行。
 
