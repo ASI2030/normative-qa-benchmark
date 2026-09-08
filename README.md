@@ -4,6 +4,17 @@ Question set, per-question records and reproduction script for an end-to-end
 evaluation of two automated knowledge-serving systems over Chinese normative
 documents (provincial policy and regulatory texts), run at two corpus scales.
 
+## Important: the two runs are not comparable
+
+This release contains per-question records for two corpus sizes, but **the two
+runs did not use the same judging standard** — the smaller-corpus run was scored
+under an earlier standard to save evaluation cost. Any figure computed by
+comparing the two runs therefore mixes a corpus-size effect with a change in the
+scoring instrument, and the two cannot be separated from these records. The
+accompanying paper reports the full-corpus (73,249-document) run only, and makes
+no cross-run claim. The smaller-corpus records are included for completeness;
+please do not read a difference between them as a scale effect.
+
 ## What is here
 
 ```
