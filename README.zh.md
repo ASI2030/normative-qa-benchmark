@@ -1,10 +1,10 @@
 # 规范性文档的版本感知与适用范围感知问答 —— 评测产物
 
 <p align="center">
-[![论文](https://img.shields.io/badge/%E8%AE%BA%E6%96%87-IAAI----27%20%E6%8A%95%E7%A8%BF-blue?style=for-the-badge&labelColor=555)](https://aaai.org/conference/aaai/aaai-27/iaai-27-call/)
-[![数据](https://img.shields.io/badge/%E6%95%B0%E6%8D%AE-CC%20BY%204.0-green?style=for-the-badge&labelColor=555)](https://creativecommons.org/licenses/by/4.0/)
-[![代码](https://img.shields.io/badge/%E4%BB%A3%E7%A0%81-MIT-green?style=for-the-badge&labelColor=555)](LICENSE)
-[![LANG](https://img.shields.io/badge/LANG-English-blue?style=for-the-badge&labelColor=555)](README.md)
+  <a href="https://aaai.org/conference/aaai/aaai-27/iaai-27-call/"><img alt="论文" src="https://img.shields.io/badge/%E8%AE%BA%E6%96%87-IAAI--27%20%E6%8A%95%E7%A8%BF-blue?style=for-the-badge&labelColor=555"></a>
+  <a href="https://creativecommons.org/licenses/by/4.0/"><img alt="数据许可" src="https://img.shields.io/badge/%E6%95%B0%E6%8D%AE-CC%20BY%204.0-green?style=for-the-badge&labelColor=555"></a>
+  <a href="LICENSE"><img alt="代码许可" src="https://img.shields.io/badge/%E4%BB%A3%E7%A0%81-MIT-green?style=for-the-badge&labelColor=555"></a>
+  <a href="README.md"><img alt="English" src="https://img.shields.io/badge/LANG-English-blue?style=for-the-badge&labelColor=555"></a>
 </p>
 
 这里是一次端到端评测的全部材料：题集、逐题记录与复现脚本。评测对象是两套自动化知识服务系统，

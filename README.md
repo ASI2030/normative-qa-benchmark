@@ -1,10 +1,10 @@
 # Version- and Scope-Aware QA over Normative Documents — Evaluation Artifact
 
 <p align="center">
-[![PAPER](https://img.shields.io/badge/PAPER-IAAI----27%20submission-blue?style=for-the-badge&labelColor=555)](https://aaai.org/conference/aaai/aaai-27/iaai-27-call/)
-[![DATA](https://img.shields.io/badge/DATA-CC%20BY%204.0-green?style=for-the-badge&labelColor=555)](https://creativecommons.org/licenses/by/4.0/)
-[![CODE](https://img.shields.io/badge/CODE-MIT-green?style=for-the-badge&labelColor=555)](LICENSE)
-[![LANG](https://img.shields.io/badge/LANG-%E4%B8%AD%E6%96%87-red?style=for-the-badge&labelColor=555)](README.zh.md)
+  <a href="https://aaai.org/conference/aaai/aaai-27/iaai-27-call/"><img alt="paper" src="https://img.shields.io/badge/PAPER-IAAI--27%20submission-blue?style=for-the-badge&labelColor=555"></a>
+  <a href="https://creativecommons.org/licenses/by/4.0/"><img alt="data licence" src="https://img.shields.io/badge/DATA-CC%20BY%204.0-green?style=for-the-badge&labelColor=555"></a>
+  <a href="LICENSE"><img alt="code licence" src="https://img.shields.io/badge/CODE-MIT-green?style=for-the-badge&labelColor=555"></a>
+  <a href="README.zh.md"><img alt="中文" src="https://img.shields.io/badge/LANG-%E4%B8%AD%E6%96%87-red?style=for-the-badge&labelColor=555"></a>
 </p>
 
 English | [简体中文](#简体中文)
