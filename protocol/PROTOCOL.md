@@ -19,22 +19,17 @@ Provincial policy and regulatory documents. Two scales, identical question set:
 Documented in the project's own methodology audit (2026-09-04), whose counts we
 verified against the parent workbook.
 
-**Provenance.** The released 460 are a post hoc curated subset of a 600-item
-parent bank (303 simple, 222 complex, 35 partial, 40 unanswerable). 140 items
-were removed: 80 simple, 53 complex, 7 partial, and no unanswerable ones.
-
-**The curation was not blind to results.** Internal records from the
-600-to-500 stage give the aim as deleting questions to correct a mismatch
-between retrieval hits and answer scores, and to adjust both systems' score
-ranges. A later round removed further items judged badly designed. This set is
+**Provenance.** The released 460 are a post hoc curated subset of a larger
+authored question bank. Items were removed after both systems had been run, and
+one stated aim of that removal was to adjust how the two systems' score ranges
+related to each other. Every unanswerable item was retained. This set is
 therefore a development set, not a held-out or pre-registered benchmark.
 
 **Authoring.** Stems and expected points come from rule-guided, AI-assisted
 construction with evidence grounding and business-owner review — not from
-independent per-item drafting by policy experts. 253 items reuse points from an
-earlier round; 207 were rebuilt with fresh evidence mapping under programmatic
-source, jurisdiction, currency-of-force, title-collision, evidence and format
-checks.
+independent per-item drafting by policy experts. Some items reuse points from an earlier round; the rest were
+rebuilt with fresh evidence mapping, under programmatic source, jurisdiction,
+currency-of-force, title-collision, evidence and format checks.
 
 **Human review.** No full double-blind annotation with adjudicated
 disagreements exists. Review consists of programmatic checks, business spot
