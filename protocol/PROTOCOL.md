@@ -1,18 +1,20 @@
 # Evaluation protocol
 
-> Sections marked **PENDING** are being supplied by the team and will be filled
-> before release; nothing here is reconstructed from memory.
+> Everything below is stated from project records. Where a fact was not
+> recorded, this document says so rather than reconstructing it.
 
 ## 1. Corpora
 Provincial policy and regulatory documents. Two scales, identical question set:
 - **73k** — 73,249 documents (full corpus)
-- **7k** — roughly 7,000 documents (subset) — *PENDING: exact document count*
+- **7k** — a smaller subset of the same corpus; we do not hold its exact document
+  count or the rule by which it was sampled
 
 ## 2. Systems under test
 - **DeepKnown** — knowledge-serving system with an explicit governance layer
 - **Google Gemini File Search** — hosted retrieval over uploaded files
 
-*PENDING: exact model versions, API dates, and per-system configuration.*
+We do not hold either system's exact model version, API dates, or per-system
+configuration for these runs.
 
 ## 3. Question set construction
 
@@ -47,9 +49,10 @@ An LLM judge scores each answer against the expected points, awarding partial
 credit; scores are not binary. Unanswerable questions score 1.0 only when the
 system declines to answer rather than producing specifics.
 
-*PENDING (owner: 金帅澎)* — judge model and version, temperature, the scoring
-prompt verbatim, the rubric, and whether the 7k and 73k runs used the same
-judge configuration.
+We do not hold the judge configuration: model and version, temperature, the
+scoring prompt verbatim, or the rubric. Nor can we confirm that the two runs
+shared one configuration — they did not; see the note at the top of the README.
+Anyone can re-judge the released answers; no one can reproduce these scores.
 
 ## 5. Aggregation
 Subset means over per-question scores, reported on a 0–100 scale:
