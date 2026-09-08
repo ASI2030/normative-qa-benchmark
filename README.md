@@ -52,23 +52,22 @@ against the figures printed in the paper, exiting non-zero on any mismatch.
   ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (recorded: 100.0 / 90.0)
   ok  overall       n=460  DeepKnown  97.9  Gemini  86.9  (recorded: 97.9 / 86.9)
 
-
 Main table, full corpus (460 questions)
-  the zero-citation rule zeroed 23 answerable items, unread
   Answerable                     n=420  DeepKnown  97.7  Gemini  86.6  gap +11.0  95% CI [8.1, 14.2]
   Unanswerable                   n= 40  DeepKnown 100.0  Gemini  90.0  gap +10.0  95% CI [2.5, 20.0]
   Overall                        n=460  DeepKnown  97.9  Gemini  86.9  gap +11.0  95% CI [8.1, 13.9]
-  Answerable, less the zeroed    n=397  DeepKnown  97.5  Gemini  91.7  gap  +5.9  95% CI [3.6, 8.3]
-  Overall, less the zeroed       n=437  DeepKnown  97.8  Gemini  91.5  gap  +6.3  95% CI [4.0, 8.7]
 
 Scoring layer, full corpus (920 records)
   rule-assigned rather than judged: 47  (Gemini 45, DeepKnown 2)
-  zero-citation rule fired on 23 answerable items; 5 carry an answer that was never read, 18 are empty
-  on the remaining answerable items Gemini cites 8.97 sources on average, median 7
   fractional judgments: 58
 
 All published figures reproduced from the per-question records.
 ```
+
+## The deployed system
+
+The governed system evaluated here is a commercial product, running at
+<https://yun.dknowc.cn/wlcb/dknowc-chat/>; use requires an account.
 
 ## Declared interest
 

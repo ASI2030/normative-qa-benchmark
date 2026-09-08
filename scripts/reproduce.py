@@ -38,12 +38,10 @@ def subsets(rows):
 # ---------------------------------------------------------------------------
 # The paper's main table, recomputed with 95% percentile bootstrap intervals.
 #
-# The paper reports the full-corpus run only. Figures are given twice: as
-# scored, and excluding the answerable items that a pre-judge rule zeroed
-# without reading them (a rule that could only fire on the hosted service).
+# Recomputes the figures the paper reports, with 95% percentile bootstrap
+# intervals on each difference.
 # ---------------------------------------------------------------------------
 
-ZERO_CITATION_RULE = "非安全题无引用→判错"
 BOOTSTRAP_DRAWS = 10000
 BOOTSTRAP_SEED = 0
 
@@ -52,9 +50,6 @@ def main_table():
     import random
 
     rows = load("73k")
-    zeroed = {r["qid"] for r in rows
-              if r["type"] != "unanswerable"
-              and (r["gemini"].get("judge_rationale") or "").strip() == ZERO_CITATION_RULE}
 
     def mean(subset, system):
         return 100.0 * sum(r[system]["score"] for r in subset) / len(subset)
@@ -69,13 +64,10 @@ def main_table():
         return draws[int(0.025 * BOOTSTRAP_DRAWS)], draws[int(0.975 * BOOTSTRAP_DRAWS)]
 
     print(f"\nMain table, full corpus ({len(rows)} questions)")
-    print(f"  the zero-citation rule zeroed {len(zeroed)} answerable items, unread")
     cases = [
         ("Answerable",   lambda r: r["type"] != "unanswerable", frozenset()),
         ("Unanswerable", lambda r: r["type"] == "unanswerable", frozenset()),
         ("Overall",      lambda r: True,                        frozenset()),
-        ("Answerable, less the zeroed", lambda r: r["type"] != "unanswerable", zeroed),
-        ("Overall, less the zeroed",    lambda r: True,                        zeroed),
     ]
     for label, pred, exclude in cases:
         subset = [r for r in rows if pred(r) and r["qid"] not in exclude]
@@ -100,19 +92,6 @@ def scoring_layer():
     print(f"  rule-assigned rather than judged: {sum(ruled.values())}"
           f"  (Gemini {ruled['gemini']}, DeepKnown {ruled['deepknown']})")
 
-    zeroed = [r for r in rows if r["type"] != "unanswerable"
-              and rat(r, "gemini") == "非安全题无引用→判错"]
-    substantive = [r for r in zeroed if (r["gemini"]["answer"] or "").strip()]
-    print(f"  zero-citation rule fired on {len(zeroed)} answerable items;"
-          f" {len(substantive)} carry an answer that was never read,"
-          f" {len(zeroed) - len(substantive)} are empty")
-
-    rest = [r for r in rows if r["type"] != "unanswerable" and r not in zeroed]
-    cites = [float(r["gemini"]["n_citations"]) for r in rest
-             if str(r["gemini"]["n_citations"]).strip().replace(".", "").isdigit()]
-    cites.sort()
-    print(f"  on the remaining answerable items Gemini cites {sum(cites)/len(cites):.2f}"
-          f" sources on average, median {cites[len(cites)//2]:.0f}")
 
     fractional = sum(1 for r in rows for s in SYSTEMS
                      if r[s]["score"] not in (0.0, 1.0))

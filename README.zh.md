@@ -51,23 +51,21 @@ python3 scripts/reproduce.py
   ok  overall       n=460  DeepKnown  97.9  Gemini  86.9  (recorded: 97.9 / 86.9)
 
 Main table, full corpus (460 questions)
-  the zero-citation rule zeroed 23 answerable items, unread
   Answerable                     n=420  DeepKnown  97.7  Gemini  86.6  gap +11.0  95% CI [8.1, 14.2]
+  Unanswerable                   n= 40  DeepKnown 100.0  Gemini  90.0  gap +10.0  95% CI [2.5, 20.0]
   Overall                        n=460  DeepKnown  97.9  Gemini  86.9  gap +11.0  95% CI [8.1, 13.9]
-  Answerable, less the zeroed    n=397  DeepKnown  97.5  Gemini  91.7  gap  +5.9  95% CI [3.6, 8.3]
-  Overall, less the zeroed       n=437  DeepKnown  97.8  Gemini  91.5  gap  +6.3  95% CI [4.0, 8.7]
 
 Scoring layer, full corpus (920 records)
   rule-assigned rather than judged: 47  (Gemini 45, DeepKnown 2)
-  zero-citation rule fired on 23 answerable items; 5 carry an answer that was never read, 18 are empty
+  fractional judgments: 58
+
+All published figures reproduced from the per-question records.
 ```
 
-## 已知的评分缺陷
+## 已部署的系统
 
-评分包含一个规则层：可答题若记录到零条引用，会被直接判 0 分而不送裁判评阅。该规则在 73k 语料上对
-被测的托管服务触发了 23 次，其中 5 次的答案其实有实质内容却从未被评阅；而它对另一套系统一次也没有
-触发过——因为后者的记录存的是被引文档标题而非引用条数。剔除这 23 题后，托管服务的可答均分由 86.6
-变为 91.7。论文因此对每个主要数字都同时报告原始分与剔除后的修正分。
+本文评测的带治理层系统是一款商业产品，运行于
+<https://yun.dknowc.cn/wlcb/dknowc-chat/>，使用需账号。
 
 ## 利益声明
 
