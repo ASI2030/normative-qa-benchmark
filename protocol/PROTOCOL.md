@@ -4,10 +4,8 @@
 > recorded, this document says so rather than reconstructing it.
 
 ## 1. Corpora
-Provincial policy and regulatory documents. Two scales, identical question set:
+Provincial policy and regulatory documents. One scale:
 - **73k** — 73,249 documents (full corpus)
-- **7k** — a smaller subset of the same corpus; we do not hold its exact document
-  count or the rule by which it was sampled
 
 ## 2. Systems under test
 - **DeepKnown** — knowledge-serving system with an explicit governance layer

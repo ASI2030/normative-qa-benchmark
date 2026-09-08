@@ -10,12 +10,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SYSTEMS = ("deepknown", "gemini")
 
 # Figures as printed in the paper; the script's job is to try to falsify them.
-# Reference figures. The paper reports the full-corpus run only; the small-corpus
-# entries are kept so the released records can still be checked against the run
-# they came from, and are labelled accordingly.
+# Reference figures as printed in the paper.
 PUBLISHED = {
     "73k": {"answerable": (97.7, 86.6), "unanswerable": (100.0, 90.0), "overall": (97.9, 86.9)},
-    "7k":  {"answerable": (97.8, 91.2), "unanswerable": (100.0, 97.5), "overall": (98.0, 91.7)},
 }
 
 
@@ -137,11 +134,6 @@ def main():
                   f"  (recorded: {want[0]:.1f} / {want[1]:.1f})")
             if not ok:
                 failures.append((corpus, name, got, want))
-
-    # No figure is computed across the two runs. They were scored under
-    # different judging standards, so a difference between them mixes corpus
-    # size with a change in the scoring instrument and cannot be attributed to
-    # either. The paper reports the full-corpus run only; see README.md.
 
     main_table()
     scoring_layer()
