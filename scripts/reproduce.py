@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Recompute every aggregate reported in the paper from the per-question records.
+"""Recompute every figure reported in the paper (Tables 1 and 2) from the per-question records.
 
 Usage:  python3 scripts/reproduce.py
 Exits non-zero if any recomputed figure disagrees with the published table.
@@ -13,6 +13,12 @@ SYSTEMS = ("deepknown", "gemini")
 # Reference figures as printed in the paper.
 PUBLISHED = {
     "73k": {"answerable": (97.7, 86.6), "unanswerable": (100.0, 90.0), "overall": (97.9, 86.9)},
+}
+
+# Table 2 of the paper: per-question-type means (DeepKnown, Gemini).
+PUBLISHED_BY_TYPE = {
+    "73k": {"simple": (98.7, 87.3), "complex": (97.2, 88.9),
+            "partial": (92.3, 67.9), "unanswerable": (100.0, 90.0)},
 }
 
 
@@ -32,6 +38,11 @@ def subsets(rows):
     answerable = [r for r in rows if r["type"] != "unanswerable"]
     unanswerable = [r for r in rows if r["type"] == "unanswerable"]
     return {"answerable": answerable, "unanswerable": unanswerable, "overall": rows}
+
+
+def by_type(rows):
+    return {t: [r for r in rows if r["type"] == t]
+            for t in ("simple", "complex", "partial", "unanswerable")}
 
 
 
@@ -78,6 +89,42 @@ def main_table():
 
 
 
+# Table 3 of the paper: items at full credit / partial credit / zero, per type.
+PUBLISHED_CREDIT = {
+    "simple":       {"deepknown": (217, 6, 0),  "gemini": (192, 5, 26)},
+    "complex":      {"deepknown": (157, 12, 0), "gemini": (143, 12, 14)},
+    "partial":      {"deepknown": (22, 6, 0),   "gemini": (10, 17, 1)},
+    "unanswerable": {"deepknown": (40, 0, 0),   "gemini": (36, 0, 4)},
+}
+
+
+def credit_breakdown():
+    """Recompute Table 3 and the zero-credit anatomy quoted in the Results section."""
+    rows = load("73k")
+    failures = 0
+    print(f"\nCredit breakdown by type (Table 3)")
+    for t, subset in by_type(rows).items():
+        for s in SYSTEMS:
+            full = sum(1 for r in subset if r[s]["score"] == 1.0)
+            zero = sum(1 for r in subset if r[s]["score"] == 0.0)
+            part = len(subset) - full - zero
+            got, want = (full, part, zero), PUBLISHED_CREDIT[t][s]
+            flag = "ok " if got == want else "MISMATCH"
+            failures += got != want
+            print(f"  {flag} {t:13s} {s:9s} full={full:3d} partial={part:3d} zero={zero:3d}"
+                  f"  (recorded: {want[0]}/{want[1]}/{want[2]})")
+    ans = [r for r in rows if r["type"] != "unanswerable"]
+    zero = [r for r in ans if r["gemini"]["score"] == 0.0]
+    empty = [r for r in zero if r["gemini"].get("returned_no_answer")]
+    uncited = [r for r in zero if not r["gemini"].get("returned_no_answer")
+               and (r["gemini"].get("judge_rationale") or "").strip() == "非安全题无引用→判错"]
+    judged = [r for r in zero if r not in empty and r not in uncited]
+    mean_c = sum(r["gemini"]["n_citations"] for r in judged) / len(judged)
+    print(f"  Gemini zero-credit answerable items: {len(zero)} = {len(empty)} empty"
+          f" + {len(uncited)} uncited + {len(judged)} judged wrong (mean citations {mean_c:.0f})")
+    return failures
+
+
 def scoring_layer():
     """Recompute the scoring-layer figures the paper quotes for this condition."""
     RULE_RATIONALES = {
@@ -114,7 +161,20 @@ def main():
             if not ok:
                 failures.append((corpus, name, got, want))
 
+        print(f"\n{corpus} corpus — by question type (Table 2)")
+        for name, subset in by_type(rows).items():
+            got = tuple(round(mean(subset, s), 1) for s in SYSTEMS)
+            want = PUBLISHED_BY_TYPE[corpus][name]
+            ok = got == want
+            flag = "ok " if ok else "MISMATCH"
+            print(f"  {flag} {name:13s} n={len(subset):3d}  DeepKnown {got[0]:5.1f}  Gemini {got[1]:5.1f}"
+                  f"  (recorded: {want[0]:.1f} / {want[1]:.1f})")
+            if not ok:
+                failures.append((corpus, "type:" + name, got, want))
+
     main_table()
+    if credit_breakdown():
+        failures.append(("73k", "credit breakdown", None, None))
     scoring_layer()
 
     if failures:

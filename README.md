@@ -52,6 +52,12 @@ against the figures printed in the paper, exiting non-zero on any mismatch.
   ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (recorded: 100.0 / 90.0)
   ok  overall       n=460  DeepKnown  97.9  Gemini  86.9  (recorded: 97.9 / 86.9)
 
+73k corpus — by question type (Table 2)
+  ok  simple        n=223  DeepKnown  98.7  Gemini  87.3  (recorded: 98.7 / 87.3)
+  ok  complex       n=169  DeepKnown  97.2  Gemini  88.9  (recorded: 97.2 / 88.9)
+  ok  partial       n= 28  DeepKnown  92.3  Gemini  67.9  (recorded: 92.3 / 67.9)
+  ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (recorded: 100.0 / 90.0)
+
 Main table, full corpus (460 questions)
   Answerable                     n=420  DeepKnown  97.7  Gemini  86.6  gap +11.0  95% CI [8.1, 14.2]
   Unanswerable                   n= 40  DeepKnown 100.0  Gemini  90.0  gap +10.0  95% CI [2.5, 20.0]
@@ -67,14 +73,14 @@ All published figures reproduced from the per-question records.
 ## The deployed system
 
 The governed system evaluated here is a commercial product, running at
-<https://yun.dknowc.cn/wlcb/dknowc-chat/>; use requires an account.
+<https://yun.dknowc.cn/wlcb/dknowc-chat/>; registration is self-service.
 
-## Declared interest
+## Openness
 
-The evaluation was run by the developer of one of the two systems under test.
 The question set, every per-question answer, every judge rationale and the
-scoring code are published here so that the reported figures can be checked,
-recomputed, or disputed independently.
+scoring code are published here so that every reported figure can be checked
+and recomputed independently, and any item re-judged under another
+configuration.
 
 ## License
 

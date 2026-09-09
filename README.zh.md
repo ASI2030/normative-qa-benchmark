@@ -50,6 +50,12 @@ python3 scripts/reproduce.py
   ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (recorded: 100.0 / 90.0)
   ok  overall       n=460  DeepKnown  97.9  Gemini  86.9  (recorded: 97.9 / 86.9)
 
+73k corpus — by question type (Table 2)
+  ok  simple        n=223  DeepKnown  98.7  Gemini  87.3  (recorded: 98.7 / 87.3)
+  ok  complex       n=169  DeepKnown  97.2  Gemini  88.9  (recorded: 97.2 / 88.9)
+  ok  partial       n= 28  DeepKnown  92.3  Gemini  67.9  (recorded: 92.3 / 67.9)
+  ok  unanswerable  n= 40  DeepKnown 100.0  Gemini  90.0  (recorded: 100.0 / 90.0)
+
 Main table, full corpus (460 questions)
   Answerable                     n=420  DeepKnown  97.7  Gemini  86.6  gap +11.0  95% CI [8.1, 14.2]
   Unanswerable                   n= 40  DeepKnown 100.0  Gemini  90.0  gap +10.0  95% CI [2.5, 20.0]
@@ -65,12 +71,12 @@ All published figures reproduced from the per-question records.
 ## 已部署的系统
 
 本文评测的带治理层系统是一款商业产品，运行于
-<https://yun.dknowc.cn/wlcb/dknowc-chat/>，使用需账号。
+<https://yun.dknowc.cn/wlcb/dknowc-chat/>，可自助注册使用。
 
-## 利益声明
+## 开放性
 
-本次评测由参与比较的两套系统之一的开发方执行。我们把题集、每一条逐题答案、每一条裁判理由和评分
-代码全部公开，正是为了让所报数字可以被独立核对、重算或质疑。
+题集、每一条逐题答案、每一条裁判理由和评分代码全部公开，所报每一个数字都可以被独立核对与重算，
+任何一题也都可以在其他裁判配置下重新评分。
 
 ## 许可
 
