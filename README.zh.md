@@ -60,6 +60,9 @@ Main table, full corpus (460 questions)
   Answerable                     n=420  DeepKnown  97.7  Gemini  86.6  gap +11.0  95% CI [8.1, 14.2]
   Unanswerable                   n= 40  DeepKnown 100.0  Gemini  90.0  gap +10.0  95% CI [2.5, 20.0]
   Overall                        n=460  DeepKnown  97.9  Gemini  86.9  gap +11.0  95% CI [8.1, 13.9]
+    by type: simple              n=223  DeepKnown  98.7  Gemini  87.3  gap +11.5  95% CI [7.3, 15.9]
+    by type: complex             n=169  DeepKnown  97.2  Gemini  88.9  gap  +8.3  95% CI [3.9, 13.2]
+    by type: partial             n= 28  DeepKnown  92.3  Gemini  67.9  gap +24.4  95% CI [14.3, 35.1]
 
 Scoring layer, full corpus (920 records)
   rule-assigned rather than judged: 47  (Gemini 45, DeepKnown 2)

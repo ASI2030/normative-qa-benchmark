@@ -79,6 +79,9 @@ def main_table():
         ("Answerable",   lambda r: r["type"] != "unanswerable", frozenset()),
         ("Unanswerable", lambda r: r["type"] == "unanswerable", frozenset()),
         ("Overall",      lambda r: True,                        frozenset()),
+        ("  by type: simple",  lambda r: r["type"] == "simple",  frozenset()),
+        ("  by type: complex", lambda r: r["type"] == "complex", frozenset()),
+        ("  by type: partial", lambda r: r["type"] == "partial", frozenset()),
     ]
     for label, pred, exclude in cases:
         subset = [r for r in rows if pred(r) and r["qid"] not in exclude]
