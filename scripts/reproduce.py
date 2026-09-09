@@ -147,6 +147,22 @@ def scoring_layer():
                      if r[s]["score"] not in (0.0, 1.0))
     print(f"  fractional judgments: {fractional}")
 
+    # Abstention subset and corpus facts quoted in the paper text.
+    import re
+    un = [r for r in rows if r["type"] == "unanswerable"]
+    credited = [r for r in un if r["gemini"]["score"] == 1.0]
+    empty = sum(1 for r in credited if r["gemini"].get("returned_no_answer"))
+    mean_c = sum(r["gemini"]["n_citations"] for r in un) / len(un)
+    print(f"\nUnanswerable subset (n={len(un)})")
+    print(f"  Gemini credited: {len(credited)} = {empty} empty returns + {len(credited) - empty} written refusals;"
+          f" mean citations reported {mean_c:.2f}")
+    print(f"  DeepKnown credited: {sum(1 for r in un if r['deepknown']['score'] == 1.0)}")
+    ans = [r for r in rows if r["type"] != "unanswerable"]
+    docs = {r["source_document"] for r in ans if r.get("source_document")}
+    notice = sum(1 for d in docs if re.search(r"关于.*通知", d))
+    print(f"  distinct gold source documents behind answerable items: {len(docs)};"
+          f" of the form 关于…通知: {notice}")
+
 
 def main():
     failures = []
