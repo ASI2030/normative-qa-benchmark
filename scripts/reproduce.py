@@ -157,11 +157,15 @@ def scoring_layer():
     print(f"  Gemini credited: {len(credited)} = {empty} empty returns + {len(credited) - empty} written refusals;"
           f" mean citations reported {mean_c:.2f}")
     print(f"  DeepKnown credited: {sum(1 for r in un if r['deepknown']['score'] == 1.0)}")
+    # Title-form statistic quoted in the Introduction: a gold source field is
+    # counted when every title it lists is of the form 关于…通知 ("Notice
+    # concerning …", i.e. contains 关于 and ends in 通知).
     ans = [r for r in rows if r["type"] != "unanswerable"]
-    docs = {r["source_document"] for r in ans if r.get("source_document")}
-    notice = sum(1 for d in docs if re.search(r"关于.*通知", d))
+    docs = {r["source_document"].strip() for r in ans if r.get("source_document")}
+    titles = lambda d: [p.strip() for p in re.split(r"[;；]", d) if p.strip()]
+    notice = sum(1 for d in docs if all(re.search(r"关于.*通知$", p) for p in titles(d)))
     print(f"  distinct gold source documents behind answerable items: {len(docs)};"
-          f" of the form 关于…通知: {notice}")
+          f" every listed title of the form 关于…通知: {notice}")
 
 
 def main():
