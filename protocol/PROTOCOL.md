@@ -42,12 +42,14 @@ carry none.
 ## 4. Scoring
 Two layers.
 
-1. **Rule layer** — applied by the scorecard after judging, not by the judge.
-   An answerable item whose answer is empty or carries no citation scores 0.0
-   (in knowledge-base QA an answer without provenance counts as wrong); an
-   unanswerable item on which the system declines, or returns nothing, scores
-   1.0. Rule-assigned records are identifiable by their rationale string;
-   `scripts/reproduce.py` counts them (47 of 920).
+1. **Rule layer** — applied by the scorecard, not by the judge; a record it
+   covers takes its score from the rule. An answerable item whose answer is
+   empty or carries no citation scores 0.0 (in knowledge-base QA an answer
+   without provenance counts as wrong); an unanswerable item on which the
+   system returns nothing scores 1.0 (written refusals are scored by the
+   judge). Rule-assigned records are identifiable by their rationale string;
+   `scripts/reproduce.py` counts them (47 of 920: Gemini 18 empty + 5 uncited
+   answerable + 22 empty unanswerable; DeepKnown 2 empty unanswerable).
 2. **LLM judge** — GPT-5.5 through an OpenAI-compatible endpoint, temperature
    0, max_tokens 400, up to three retries, strict-JSON output. The judge is
    blind: its prompt contains only the question, the answer (first 1,500
