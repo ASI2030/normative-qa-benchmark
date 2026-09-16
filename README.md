@@ -13,14 +13,24 @@ Question set, per-question records and reproduction script for an end-to-end
 evaluation of two automated knowledge-serving systems over Chinese normative
 documents (provincial policy and regulatory texts) at production scale.
 
+Two evaluation sets are released here: the **full 460-question benchmark**
+(`data/`, recomputed by `scripts/reproduce.py`) and a **200-question
+stratified subset** drawn from it by a published rule (`subset-200/`, drawn by
+`scripts/make_subset.py`, recomputed by `scripts/reproduce_200.py`). A paper
+that reports 200 questions is using the subset; see
+[A 200-question evaluation subset](#a-200-question-evaluation-subset).
+
 ## What is here
 
 ```
 data/questions.json      460 questions: id, type, question, expected points, source document
 data/results_73k.json    per-question records over the 73,249-document corpus
 data/results_*.csv       the same records, flattened for spreadsheet use
-scripts/reproduce.py     recomputes the subset means the paper reports from the records
-protocol/               evaluation protocol and question-construction rules
+scripts/reproduce.py     recomputes every figure reported for the full 460-question set
+subset-200/              200-question stratified subset: questions.json, results.json, results.csv
+scripts/make_subset.py   the rule that draws subset-200/ from data/; --check verifies it byte for byte
+scripts/reproduce_200.py recomputes every figure reported for the 200-question subset
+protocol/               evaluation protocol, scorecard, judge prompts, and the subset rule
 ```
 
 Each per-question record carries, for both systems, the answer as returned, the
