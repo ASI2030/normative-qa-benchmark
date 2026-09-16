@@ -115,6 +115,17 @@ An earlier revision of the answerable-item prompt differed only in wording
 (two extra numeric examples in principle 1 and a parenthetical in principle
 2); model, temperature, formula and rules were identical.
 
+## 4b. The 200-question subset
+
+`subset-200/` is a stratified sample of the 420 answerable questions, drawn by
+`scripts/make_subset.py`: strata are (question type × jurisdiction of the gold
+source document), allocation is proportional by largest remainder, and the seed
+is 0, fixed before the draw. The selection touches no score, answer, citation
+or judge rationale. Composition: simple 106, complex 81, partial 13, over 191
+distinct gold source documents. Everything in sections 1, 2, 4 and 5 applies to
+it unchanged — same corpus, same systems, same scorecard, same judge — the
+subset changes only which questions are reported.
+
 ## 5. Aggregation
 Per-question means on a 0–100 scale: answerable (n=420), unanswerable (n=40),
 overall (n=460), and by question type. Differences carry 95% percentile

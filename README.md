@@ -73,6 +73,34 @@ Scoring layer, full corpus (920 records)
 All published figures reproduced from the per-question records.
 ```
 
+## A 200-question evaluation subset
+
+`subset-200/` holds a 200-item evaluation set drawn from the 420 answerable
+questions in `data/` by a fixed rule: stratified by question type and by the
+jurisdiction of the gold source document, proportional allocation, seed 0. The
+selection reads only those two fields — never a score, answer, citation or
+judge rationale — so which items it keeps cannot depend on how either system
+performed on them. The rule is `scripts/make_subset.py`, which regenerates the
+directory byte for byte:
+
+```bash
+python3 scripts/make_subset.py --check     # verify subset-200/ is what the rule produces
+python3 scripts/reproduce_200.py           # recompute its reported figures
+```
+
+| type | n | DeepKnown | Gemini | gap | 95% CI |
+|---|---|---|---|---|---|
+| overall | 200 | 97.7 | 88.1 | +9.6 | [5.7, 13.8] |
+| simple | 106 | 99.0 | 91.1 | +7.9 | [3.2, 13.3] |
+| complex | 81 | 96.8 | 86.6 | +10.2 | [3.5, 18.0] |
+| partial | 13 | 92.3 | 73.1 | +19.2 | [7.7, 30.8] |
+
+The seed was fixed before the draw. Across seeds 0–9 the overall gap on a
+200-item draw ranges from +7.6 to +12.7 with a median of +11.3, against +11.0
+on all 420 answerable items: read this subset's +9.6 as one draw from that
+distribution rather than as a separate result, and use the full set for the
+tightest estimate.
+
 ## The deployed system
 
 The governed system evaluated here is a commercial product, running at
